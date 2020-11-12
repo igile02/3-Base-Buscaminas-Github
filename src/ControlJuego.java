@@ -44,12 +44,15 @@ public class ControlJuego {
 		int num1;
 		int num2;
 
-		while (minas > 0) {
-			num1 = (int) (Math.random() * LADO_TABLERO);
-			num2 = (int) (Math.random() * LADO_TABLERO);
-			if (tablero[num1][num2] != MINA) {
-				tablero[num1][num2] = MINA;
-				minas--;
+		if (tablero != null) {
+		} else {
+			while (minas > 0) {
+				num1 = (int) (Math.random() * LADO_TABLERO);
+				num2 = (int) (Math.random() * LADO_TABLERO);
+				if (tablero[num1][num2] != MINA) {
+					tablero[num1][num2] = MINA;
+					minas--;
+				}
 			}
 		}
 		// Al final del m�todo hay que guardar el n�mero de minas para las casillas que
@@ -89,7 +92,7 @@ public class ControlJuego {
 	}
 
 	/**
-	 * Método que nos permite
+	 * Método que nos permite abrir una casilla. Devuelve verdadero y suma un punto si no hay mina.
 	 * 
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por
 	 *      el ControlJuego. Por lo tanto siempre sumaremos puntos
