@@ -11,8 +11,6 @@ import java.util.Random;
  *
  */
 public class ControlJuego {
-	ArrayList<Integer> ramdom1 = new ArrayList<Integer>();
-	ArrayList<Integer> ramdom2 = new ArrayList<Integer>();
 	private final static int MINA = -1;
 	final int MINAS_INICIALES = 20;
 	final int LADO_TABLERO = 10;
@@ -46,18 +44,13 @@ public class ControlJuego {
 		int num1;
 		int num2;
 
-		for (int i = 0; i < LADO_TABLERO; i++) {
-			ramdom1.add(i);
-			ramdom2.add(i);
-		}
-
 		while (minas > 0) {
-			num1 = (int) (Math.random() * ramdom1.size());
-			num2 = (int) (Math.random() * ramdom2.size());
-			tablero[ramdom1.get(num1)][ramdom2.get(num2)] = MINA;
-			ramdom1.remove(num1);
-			ramdom2.remove(num2);
-			minas--;
+			num1 = (int) (Math.random() * LADO_TABLERO);
+			num2 = (int) (Math.random() * LADO_TABLERO);
+			if (tablero[num1][num2] != MINA) {
+				tablero[num1][num2] = MINA;
+				minas--;
+			}
 		}
 		// Al final del m�todo hay que guardar el n�mero de minas para las casillas que
 		// no son mina:
@@ -83,7 +76,7 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		int minas = 0;
-		if ((i < 0 && j < 0) && (i > LADO_TABLERO-1 && j > LADO_TABLERO-1)) {
+		if ((i < 0 && j < 0) && (i > LADO_TABLERO - 1 && j > LADO_TABLERO - 1)) {
 			for (int i2 = i - 1; i2 <= i + 1; i2++) {
 				for (int j2 = j - 1; j2 <= j + 1; j2++) {
 					if (tablero[i2][j2] == MINA) {
@@ -132,7 +125,6 @@ public class ControlJuego {
 			System.out.println();
 		}
 		System.out.println("\nPuntuación: " + puntuacion);
-		System.out.println(ramdom1.size());
 	}
 
 	/**
