@@ -66,6 +66,7 @@ public class VentanaPrincipal {
 		panelJuego.setLayout(new GridLayout(10, 10));
 
 		botonEmpezar = new JButton("Go!");
+		botonEmpezar.setEnabled(true);
 		pantallaPuntuacion = new JTextField("0");
 		pantallaPuntuacion.setEditable(false);
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -141,9 +142,14 @@ public class VentanaPrincipal {
 	 * programa
 	 */
 	public void inicializarListeners() {
+
+		botonEmpezar.addActionListener((e) -> {
+			reiniciarPartida();
+		});
+
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego.length; j++) {
-				botonesJuego[i][j].addActionListener(new ActionBoton(this,i,j));
+				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
 			}
 		}
 
@@ -210,13 +216,30 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		if (juego.esFinJuego() || !porExplosion) {
+		if (juego.esFinJuego()) {
 			for (int i = 0; i < botonesJuego.length; i++) {
 				for (int j = 0; j < botonesJuego.length; j++) {
 					botonesJuego[i][j].setEnabled(false);
 				}
 			}
 			botonEmpezar.setEnabled(false);
+			int opcion=JOptionPane.showConfirmDialog(ventana, "Enhorabuena ha ganado \n ¿Desea jugar otra partida?", "Juego Ganado" ,JOptionPane.YES_NO_OPTION);
+			if(JOptionPane.YES_OPTION==opcion){
+				reiniciarPartida();
+			}
+		}
+
+		if (!porExplosion) {
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego.length; j++) {
+					botonesJuego[i][j].setEnabled(false);
+				}
+			}
+			botonEmpezar.setEnabled(false);
+			int opcion=JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina \n ¿Desea jugar otra partida?", "Juego Perdido" ,JOptionPane.YES_NO_OPTION);
+			if(JOptionPane.YES_OPTION==opcion){
+				reiniciarPartida();
+			}
 		}
 	}
 
@@ -233,6 +256,24 @@ public class VentanaPrincipal {
 	public void refrescarPantalla() {
 		ventana.revalidate();
 		ventana.repaint();
+	}
+
+	/**
+	 * Método que reinicia la partida
+	 * @return
+	 */
+	public void reiniciarPartida(){
+		juego.inicializarPartida();
+			actualizarPuntuacion();
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego[i].length; j++) {
+					panelesJuego[i][j].removeAll();
+					botonesJuego[i][j] = new JButton("-");
+					panelesJuego[i][j].add(botonesJuego[i][j]);
+				}
+			}
+			inicializarListeners();
+			refrescarPantalla();
 	}
 
 	/**

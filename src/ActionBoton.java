@@ -27,6 +27,11 @@ public class ActionBoton implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ventana.getJuego().abrirCasilla(i, j);
+		boolean fin;
+		if((fin=ventana.getJuego().abrirCasilla(i, j))){
+			ventana.mostrarNumMinasAlrededor(i, j);
+		} 
+		ventana.mostrarFinJuego(fin);
+		ventana.actualizarPuntuacion();
 	}
 }

@@ -72,6 +72,7 @@ public class ControlJuego {
 			}
 		}
 
+		depurarTablero();
 	}
 
 	/**
@@ -130,7 +131,7 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		return ((LADO_TABLERO*2)-20)==puntuacion? true : false;
+		return ((LADO_TABLERO*LADO_TABLERO)-20)==puntuacion? true : false;
 	}
 
 	/**
