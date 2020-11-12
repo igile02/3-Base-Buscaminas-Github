@@ -28,10 +28,10 @@ public class ActionBoton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		boolean fin;
-		if((fin=ventana.getJuego().abrirCasilla(i, j))){
+		if ((fin = ventana.getJuego().abrirCasilla(i, j))) {
 			ventana.mostrarNumMinasAlrededor(i, j);
-		} 
-		ventana.mostrarFinJuego(fin);
+		}
 		ventana.actualizarPuntuacion();
+		ventana.mostrarFinJuego(fin);
 	}
 }
