@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 /**
  * Ventana principal del Buscaminas
  * 
- * @author {Rellenar por el alumno}
+ * @author {Iván Gil Esteban}
  */
 public class VentanaPrincipal {
 
@@ -66,7 +66,6 @@ public class VentanaPrincipal {
 		panelJuego.setLayout(new GridLayout(10, 10));
 
 		botonEmpezar = new JButton("Go!");
-		botonEmpezar.setEnabled(true);
 		pantallaPuntuacion = new JTextField("0");
 		pantallaPuntuacion.setEditable(false);
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -144,7 +143,11 @@ public class VentanaPrincipal {
 	public void inicializarListeners() {
 
 		botonEmpezar.addActionListener((e) -> {
-			reiniciarPartida();
+			juego.inicializarPartida();
+			actualizarPuntuacion();
+			ventana.getContentPane().removeAll();
+			inicializar();
+			refrescarPantalla();
 		});
 
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -223,9 +226,14 @@ public class VentanaPrincipal {
 				}
 			}
 			botonEmpezar.setEnabled(false);
-			int opcion=JOptionPane.showConfirmDialog(ventana, "Enhorabuena ha ganado \n ¿Desea jugar otra partida?", "Juego Ganado" ,JOptionPane.YES_NO_OPTION);
-			if(JOptionPane.YES_OPTION==opcion){
-				reiniciarPartida();
+			int opcion = JOptionPane.showConfirmDialog(ventana, "Enhorabuena ha ganado \n ¿Desea jugar otra partida?",
+					"Juego Ganado", JOptionPane.YES_NO_OPTION);
+			if (JOptionPane.YES_OPTION == opcion) {
+				juego.inicializarPartida();
+				actualizarPuntuacion();
+				ventana.getContentPane().removeAll();
+				inicializar();
+				refrescarPantalla();
 			}
 		}
 
@@ -236,9 +244,14 @@ public class VentanaPrincipal {
 				}
 			}
 			botonEmpezar.setEnabled(false);
-			int opcion=JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina \n ¿Desea jugar otra partida?", "Juego Perdido" ,JOptionPane.YES_NO_OPTION);
-			if(JOptionPane.YES_OPTION==opcion){
-				reiniciarPartida();
+			int opcion = JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina \n ¿Desea jugar otra partida?",
+					"Juego Perdido", JOptionPane.YES_NO_OPTION);
+			if (JOptionPane.YES_OPTION == opcion) {
+				juego.inicializarPartida();
+				actualizarPuntuacion();
+				ventana.getContentPane().removeAll();
+				inicializar();
+				refrescarPantalla();
 			}
 		}
 	}
@@ -256,24 +269,6 @@ public class VentanaPrincipal {
 	public void refrescarPantalla() {
 		ventana.revalidate();
 		ventana.repaint();
-	}
-
-	/**
-	 * Método que reinicia la partida
-	 * @return
-	 */
-	public void reiniciarPartida(){
-		juego.inicializarPartida();
-			actualizarPuntuacion();
-			for (int i = 0; i < botonesJuego.length; i++) {
-				for (int j = 0; j < botonesJuego[i].length; j++) {
-					panelesJuego[i][j].removeAll();
-					botonesJuego[i][j] = new JButton("-");
-					panelesJuego[i][j].add(botonesJuego[i][j]);
-				}
-			}
-			inicializarListeners();
-			refrescarPantalla();
 	}
 
 	/**

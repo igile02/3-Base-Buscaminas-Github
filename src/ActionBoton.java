@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * pasando en el constructor la referencia a la ventana. Recuerda que desde la
  * ventana, se puede acceder a la variable de tipo ControlJuego
  * 
- * @author jesusredondogarcia
+ * @author Iván Gil Esteban
  **
  */
 public class ActionBoton implements ActionListener {

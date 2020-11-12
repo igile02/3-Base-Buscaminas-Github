@@ -7,7 +7,7 @@ import java.util.Random;
  * mina, se guarda cuántas minas hay alrededor. Almacena la puntuación de la
  * partida
  * 
- * @author jesusredondogarcia
+ * @author Iván Gil Esteban
  *
  */
 public class ControlJuego {
@@ -24,8 +24,6 @@ public class ControlJuego {
 
 		// Inicializamos una nueva partida
 		inicializarPartida();
-		// De momento lo dejo para probar:
-		depurarTablero();
 	}
 
 	/**
