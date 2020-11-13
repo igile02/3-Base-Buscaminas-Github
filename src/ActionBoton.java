@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
  */
 public class ActionBoton implements ActionListener {
 
-	VentanaPrincipal ventana;
-	int i;
-	int j;
+	private VentanaPrincipal ventana;
+	private int i;
+	private int j;
 
 	public ActionBoton(VentanaPrincipal ventana, int i, int j) {
 		this.ventana = ventana;

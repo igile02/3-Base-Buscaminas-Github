@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,30 +15,32 @@ import javax.swing.SwingConstants;
  * Ventana principal del Buscaminas
  * 
  * @author {Iván Gil Esteban}
+ * @version 1.6		(current version number of program)
+ * @since	1.2		(the version of the package this calass was firs add to)
  */
 public class VentanaPrincipal {
 
 	// La ventana principal, en este caso, guarda todos los componentes:
-	JFrame ventana;
-	JPanel panelImagen;
-	JPanel panelEmpezar;
-	JPanel panelPuntuacion;
-	JPanel panelJuego;
+	private JFrame ventana;
+	private JPanel panelImagen;
+	private JPanel panelEmpezar;
+	private JPanel panelPuntuacion;
+	private JPanel panelJuego;
 
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar después los componentes por otros
-	JPanel[][] panelesJuego;
-	JButton[][] botonesJuego;
+	private JPanel[][] panelesJuego;
+	private JButton[][] botonesJuego;
 
 	// Correspondencia de colores para las minas:
-	Color correspondenciaColores[] = { Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED,
+	private Color correspondenciaColores[] = { Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED,
 			Color.RED, Color.RED, Color.RED, Color.RED };
 
-	JButton botonEmpezar;
-	JTextField pantallaPuntuacion;
+	private JButton botonEmpezar;
+	private JTextField pantallaPuntuacion;
 
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
-	ControlJuego juego;
+	private ControlJuego juego;
 
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -143,11 +143,7 @@ public class VentanaPrincipal {
 	public void inicializarListeners() {
 
 		botonEmpezar.addActionListener((e) -> {
-			juego.inicializarPartida();
-			actualizarPuntuacion();
-			ventana.getContentPane().removeAll();
-			inicializar();
-			refrescarPantalla();
+			reiniciarPartida();
 		});
 
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -179,32 +175,7 @@ public class VentanaPrincipal {
 		panelesJuego[i][j].removeAll();
 		panelesJuego[i][j].add(label);
 		label.setText(String.valueOf(num));
-
-		switch (num) {
-			case 0:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-			case 1:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-			case 2:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-			case 3:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-			case 4:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
-				label.setForeground(correspondenciaColores[num]);
-				break;
-		}
-
+		label.setForeground(correspondenciaColores[num]);
 		label.setHorizontalAlignment(JLabel.CENTER);
 		panelesJuego[i][j].repaint();
 	}
@@ -229,11 +200,7 @@ public class VentanaPrincipal {
 			int opcion = JOptionPane.showConfirmDialog(ventana, "Enhorabuena ha ganado \n ¿Desea jugar otra partida?",
 					"Juego Ganado", JOptionPane.YES_NO_OPTION);
 			if (JOptionPane.YES_OPTION == opcion) {
-				juego.inicializarPartida();
-				actualizarPuntuacion();
-				ventana.getContentPane().removeAll();
-				inicializar();
-				refrescarPantalla();
+				reiniciarPartida();
 			}
 		}
 
@@ -247,11 +214,7 @@ public class VentanaPrincipal {
 			int opcion = JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina \n ¿Desea jugar otra partida?",
 					"Juego Perdido", JOptionPane.YES_NO_OPTION);
 			if (JOptionPane.YES_OPTION == opcion) {
-				juego.inicializarPartida();
-				actualizarPuntuacion();
-				ventana.getContentPane().removeAll();
-				inicializar();
-				refrescarPantalla();
+				reiniciarPartida();
 			}
 		}
 	}
@@ -278,6 +241,17 @@ public class VentanaPrincipal {
 	 */
 	public ControlJuego getJuego() {
 		return juego;
+	}
+
+	/*
+	*Método para reiniciar todo el tablero y las posiciones de las minas
+	*/
+	public void reiniciarPartida() {
+		juego.inicializarPartida();
+		actualizarPuntuacion();
+		ventana.getContentPane().removeAll();
+		inicializar();
+		refrescarPantalla();
 	}
 
 	/**

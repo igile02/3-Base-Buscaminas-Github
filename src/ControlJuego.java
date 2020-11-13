@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
  * el tablero. Si hay una mina en una posición guarda el número -1 Si no hay una
@@ -12,8 +9,8 @@ import java.util.Random;
  */
 public class ControlJuego {
 	private final static int MINA = -1;
-	final int MINAS_INICIALES = 20;
-	final int LADO_TABLERO = 10;
+	private final int MINAS_INICIALES = 20;
+	private final int LADO_TABLERO = 10;
 
 	private int[][] tablero;
 	private int puntuacion;
