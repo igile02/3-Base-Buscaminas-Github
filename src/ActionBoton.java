@@ -30,8 +30,8 @@ public class ActionBoton implements ActionListener {
 		boolean fin;
 		if ((fin = ventana.getJuego().abrirCasilla(i, j))) {
 			ventana.mostrarNumMinasAlrededor(i, j);
+			ventana.actualizarPuntuacion();
 		}
-		ventana.actualizarPuntuacion();
 		ventana.mostrarFinJuego(fin);
 	}
 }

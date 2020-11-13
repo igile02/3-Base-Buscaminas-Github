@@ -174,10 +174,10 @@ public class VentanaPrincipal {
 		JLabel label = new JLabel();
 		panelesJuego[i][j].removeAll();
 		panelesJuego[i][j].add(label);
-		label.setText(String.valueOf(num));
+		label.setText(Integer.toString(num));
 		label.setForeground(correspondenciaColores[num]);
 		label.setHorizontalAlignment(JLabel.CENTER);
-		panelesJuego[i][j].repaint();
+		refrescarPantalla();
 	}
 
 	/**

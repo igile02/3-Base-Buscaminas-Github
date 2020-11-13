@@ -82,22 +82,22 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		int numMinas = 0;
+		int iInicial = Math.max(0, i - 1);
+		int iFinal = Math.min(LADO_TABLERO - 1, i + 1);
+		int jInicial = Math.max(0, j - 1);
+		int jFinal = Math.min(LADO_TABLERO - 1, j + 1);
 
-        int iInicial = Math.max(0, i-1);
-        int iFinal = Math.min(LADO_TABLERO-1, i+1);
+		for (int vertical = iInicial; vertical <= iFinal; vertical++) {
+			for (int horizontal = jInicial; horizontal <= jFinal; horizontal++) {
+				if (vertical >= 0 && vertical < LADO_TABLERO && horizontal >= 0 && horizontal < LADO_TABLERO - 1) {
+					if (tablero[vertical][horizontal] == MINA) {
+						numMinas++;
+					}
+				}
+			}
+		}
 
-        int jInicial = Math.max(0, j-1);
-        int jFinal = Math.min(LADO_TABLERO, j+1);
-
-        for (int vertical = iInicial; vertical < iFinal; vertical++){
-            for (int horizontal = jInicial; horizontal < jFinal; horizontal++){
-                if(tablero[vertical][horizontal] == MINA){
-                    numMinas++;
-                }
-            }
-        }
-
-        return numMinas;
+		return numMinas;
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class ControlJuego {
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
 	public boolean abrirCasilla(int i, int j) {
-		if(tablero[i][j]==MINA){
+		if (tablero[i][j] == MINA) {
 			return false;
 		}
 		puntuacion++;
@@ -126,7 +126,7 @@ public class ControlJuego {
 	 *         minas.
 	 **/
 	public boolean esFinJuego() {
-		return ((LADO_TABLERO*LADO_TABLERO)-20)==puntuacion? true : false;
+		return ((LADO_TABLERO * LADO_TABLERO) - 20) == puntuacion ? true : false;
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class ControlJuego {
 	 * @return Un entero con la puntuación actual
 	 */
 	public int getPuntuacion() {
-		return puntuacion; 
+		return puntuacion;
 	}
 
 }
