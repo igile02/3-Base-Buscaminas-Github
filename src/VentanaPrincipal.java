@@ -14,9 +14,10 @@ import javax.swing.SwingConstants;
 /**
  * Ventana principal del Buscaminas
  * 
- * @author {Iván Gil Esteban}
- * @version 1.6		(current version number of program)
- * @since	1.2		(the version of the package this calass was firs add to)
+ * @author Iván Gil Esteban
+ * @see
+ * @version 1.0 (current version number of program)
+ * @since 1.0 (the version of the package this calass was firs add to)
  */
 public class VentanaPrincipal {
 
@@ -244,8 +245,8 @@ public class VentanaPrincipal {
 	}
 
 	/*
-	*Método para reiniciar todo el tablero y las posiciones de las minas
-	*/
+	 * Método para reiniciar todo el tablero y las posiciones de las minas
+	 */
 	public void reiniciarPartida() {
 		juego.inicializarPartida();
 		actualizarPuntuacion();

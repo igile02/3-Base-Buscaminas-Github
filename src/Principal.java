@@ -2,13 +2,15 @@ import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
- * @author  {Iván Gil Esteban}
+ * 
+ * @author Iván Gil Esteban
  *
  */
 public class Principal {
 
 	/**
 	 * Método main
+	 * 
 	 * @param args : Cadenas de parámetros del main
 	 */
 	public static void main(String[] args) {
