@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +16,7 @@ import javax.swing.SwingConstants;
  * Ventana principal del Buscaminas
  * 
  * @author Iván Gil Esteban
- * @see
+ * @see ControlJuego
  * @version 1.0 (current version number of program)
  * @since 1.0 (the version of the package this calass was firs add to)
  */
@@ -166,11 +167,6 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i, int j) {
-		// TODO
-		// Seleccionar el panel[i][j] correspondiente
-		// Eliminar todos sus componentes, buscarlo en internet
-		// Despues añadimos un jlabel centrado y no editables con el num minas alrededor
-		// INSTANCIA DE CONTROL JUEGO PARA SACAR LAS MINAS
 		int num = juego.getMinasAlrededor(i, j);
 		JLabel label = new JLabel();
 		panelesJuego[i][j].removeAll();
@@ -192,31 +188,18 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
 		if (juego.esFinJuego()) {
-			for (int i = 0; i < botonesJuego.length; i++) {
-				for (int j = 0; j < botonesJuego.length; j++) {
-					botonesJuego[i][j].setEnabled(false);
-				}
-			}
-			botonEmpezar.setEnabled(false);
-			int opcion = JOptionPane.showConfirmDialog(ventana, "Enhorabuena ha ganado \n ¿Desea jugar otra partida?",
-					"Juego Ganado", JOptionPane.YES_NO_OPTION);
-			if (JOptionPane.YES_OPTION == opcion) {
-				reiniciarPartida();
-			}
+			desactivarBotones();
+			/*
+			ImageIcon icono = new ImageIcon("carita.png");
+			botonEmpezar.setText("");
+			botonEmpezar.setIcon(icono);
+			*/
+			mensajeFin("Enhorabuena ha ganado \n ¿Desea jugar otra partida?", "Juego Ganado");
 		}
 
 		if (!porExplosion) {
-			for (int i = 0; i < botonesJuego.length; i++) {
-				for (int j = 0; j < botonesJuego.length; j++) {
-					botonesJuego[i][j].setEnabled(false);
-				}
-			}
-			botonEmpezar.setEnabled(false);
-			int opcion = JOptionPane.showConfirmDialog(ventana, "Ha explotado una mina \n ¿Desea jugar otra partida?",
-					"Juego Perdido", JOptionPane.YES_NO_OPTION);
-			if (JOptionPane.YES_OPTION == opcion) {
-				reiniciarPartida();
-			}
+			desactivarBotones();
+			mensajeFin("Ha explotado una mina \n ¿Desea jugar otra partida?", "Juego Perdido");
 		}
 	}
 
@@ -244,7 +227,7 @@ public class VentanaPrincipal {
 		return juego;
 	}
 
-	/*
+	/**
 	 * Método para reiniciar todo el tablero y las posiciones de las minas
 	 */
 	public void reiniciarPartida() {
@@ -253,6 +236,29 @@ public class VentanaPrincipal {
 		ventana.getContentPane().removeAll();
 		inicializar();
 		refrescarPantalla();
+	}
+
+	/**
+	 * Método para desactivar los botones del tablero.
+	 */
+	public void desactivarBotones() {
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego.length; j++) {
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
+	}
+
+	/**
+	 * Método que muestra el mensaje correspondiente para cada final y reinicia la partida si la opcion selecionada es "YES"
+	 * @param mensaje
+	 * @param titulo
+	 */
+	public void mensajeFin(String mensaje, String titulo) {
+		int opcion = JOptionPane.showConfirmDialog(ventana, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+		if(opcion==JOptionPane.YES_OPTION){
+			reiniciarPartida();
+		}
 	}
 
 	/**

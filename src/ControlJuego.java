@@ -32,9 +32,6 @@ public class ControlJuego {
 	 *        guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida() {
-
-		// TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior,
-		// lo pongo todo a cero para inicializarlo.
 		int minas = MINAS_INICIALES;
 		int num1;
 		int num2;
@@ -57,8 +54,6 @@ public class ControlJuego {
 		}
 		puntuacion = 0;
 
-		// Al final del m�todo hay que guardar el n�mero de minas para las casillas que
-		// no son mina:
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != MINA) {
