@@ -1,3 +1,5 @@
+package buscaminas;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,8 +19,10 @@ import javax.swing.SwingConstants;
  * 
  * @author Iván Gil Esteban
  * @see ControlJuego
- * @version 1.0 (current version number of program)
- * @since 1.0 (the version of the package this calass was firs add to)
+ * @version 1.0 
+ * @since 1.0 
+ * {@link #inicializar()}
+ * {@code literal}
  */
 public class VentanaPrincipal {
 
@@ -28,6 +32,7 @@ public class VentanaPrincipal {
 	private JPanel panelEmpezar;
 	private JPanel panelPuntuacion;
 	private JPanel panelJuego;
+	private JCronometro cronometro;
 
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar después los componentes por otros
@@ -59,7 +64,9 @@ public class VentanaPrincipal {
 		ventana.setLayout(new GridBagLayout());
 
 		// Inicializamos componentes
-		panelImagen = new JPanel();
+		cronometro = new JCronometro();
+		panelImagen = new JPanel(new GridLayout());
+		panelImagen.add(cronometro);
 		panelEmpezar = new JPanel();
 		panelEmpezar.setLayout(new GridLayout(1, 1));
 		panelPuntuacion = new JPanel();
@@ -146,6 +153,8 @@ public class VentanaPrincipal {
 
 		botonEmpezar.addActionListener((e) -> {
 			reiniciarPartida();
+			cronometro.resetear();
+			cronometro.comenzar();
 		});
 
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -186,19 +195,25 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el
 	 *       juego.
 	 */
-	public void mostrarFinJuego(boolean porExplosion) {
+	public void mostrarFinJuego(boolean porExplosion,int i, int j) {
 		if (juego.esFinJuego()) {
+			cronometro.parar();
 			desactivarBotones();
-			/*
-			ImageIcon icono = new ImageIcon("carita.png");
-			botonEmpezar.setText("");
+			
+			ImageIcon icono = new ImageIcon("imagenes\\carita.png");
 			botonEmpezar.setIcon(icono);
-			*/
+			
 			mensajeFin("Enhorabuena ha ganado \n ¿Desea jugar otra partida?", "Juego Ganado");
 		}
 
 		if (!porExplosion) {
+			cronometro.parar();
 			desactivarBotones();
+
+			ImageIcon icono = new ImageIcon("imagenes\\mina.png");
+			botonesJuego[i][j].setText("");
+			botonesJuego[i][j].setIcon(icono);
+
 			mensajeFin("Ha explotado una mina \n ¿Desea jugar otra partida?", "Juego Perdido");
 		}
 	}

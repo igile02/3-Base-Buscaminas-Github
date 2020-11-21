@@ -1,3 +1,5 @@
+package buscaminas;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,6 +34,6 @@ public class ActionBoton implements ActionListener {
 			ventana.mostrarNumMinasAlrededor(i, j);
 			ventana.actualizarPuntuacion();
 		}
-		ventana.mostrarFinJuego(fin);
+		ventana.mostrarFinJuego(fin,i,j);
 	}
 }

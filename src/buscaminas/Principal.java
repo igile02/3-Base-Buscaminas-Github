@@ -1,3 +1,5 @@
+package buscaminas;
+
 import java.awt.EventQueue;
 
 /**

@@ -1,3 +1,5 @@
+package buscaminas;
+
 /**
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
  * el tablero. Si hay una mina en una posición guarda el número -1 Si no hay una
@@ -36,11 +38,9 @@ public class ControlJuego {
 		int num1;
 		int num2;
 
-		if (tablero != null) {
-			for (int i = 0; i < tablero.length; i++) {
-				for (int j = 0; j < tablero.length; j++) {
-					tablero[i][j] = 0;
-				}
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero.length; j++) {
+				tablero[i][j] = 0;
 			}
 		}
 
