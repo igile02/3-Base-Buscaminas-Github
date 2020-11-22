@@ -156,13 +156,12 @@ public class VentanaPrincipal {
 			reiniciarPartida();
 			cronometro.resetear();
 			cronometro.comenzar();
-		});
-
-		for (int i = 0; i < botonesJuego.length; i++) {
-			for (int j = 0; j < botonesJuego.length; j++) {
-				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego.length; j++) {
+					botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
+				}
 			}
-		}
+		});
 
 	}
 
