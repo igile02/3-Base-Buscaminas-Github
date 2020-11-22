@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * Clase que extiende de JPanel e implementa Runnable, contiene un JLabel en el que vamos a ir mostrando
@@ -34,7 +35,7 @@ public class JCronometro extends JPanel implements Runnable {
         this.setLayout(new GridLayout());
         this.setBackground(Color.CYAN);
         contador = new JLabel("00:00");
-        contador.setHorizontalAlignment(JLabel.CENTER);
+        contador.setHorizontalAlignment(SwingUtilities.CENTER);
         contador.setFont(new Font("Arial", Font.BOLD, 14));
         this.add(contador);
     }

@@ -1,5 +1,5 @@
 package buscaminas;
- 
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,18 +15,20 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
- * Ventana principal del Buscaminas, en esta clase nos encargamos de todo lo relaccionado con la parte visual
- * de nuestro juego(mostrar mensajes, actualizar puntuacion, refrescar pantalla, etc), creamos todos 
- * sus componentes, los inicializamos {@link #inicializar()} {@code ventana.setVisible(true);
+ * Ventana principal del Buscaminas, en esta clase nos encargamos de todo lo
+ * relaccionado con la parte visual de nuestro juego(mostrar mensajes,
+ * actualizar puntuacion, refrescar pantalla, etc), creamos todos sus
+ * componentes, los inicializamos {@link #inicializar()}
+ * {@code ventana.setVisible(true);
  * 														 		    inicializarComponentes();
  *																    inicializarListeners();}
- * y les damos formato, esta clase se encarga también de dar las acciones 
+ * y les damos formato, esta clase se encarga también de dar las acciones
  * respectivas a cada uno de los botones mediante los listeners.
  * 
  * @author Iván Gil Esteban
  * @see ControlJuego
- * @version 1.0 
- * @since 1.0 
+ * @version 1.0
+ * @since 1.0
  */
 public class VentanaPrincipal {
 
@@ -191,19 +193,21 @@ public class VentanaPrincipal {
 	 * @param porExplosion : Un booleano que indica si es final del juego porque ha
 	 *                     explotado una mina (true) o bien porque hemos desactivado
 	 *                     todas (false)
-	 * @param i: Posicion vertical del boton que es una mina para colocar el icono de mina.
-	 * @param j: Posicion  del boton que es una mina para colocar el icono de mina.
+	 * @param i:           Posicion vertical del boton que es una mina para colocar
+	 *                     el icono de mina.
+	 * @param j:           Posicion del boton que es una mina para colocar el icono
+	 *                     de mina.
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el
 	 *       juego.
 	 */
-	public void mostrarFinJuego(boolean porExplosion,int i, int j) {
+	public void mostrarFinJuego(boolean porExplosion, int i, int j) {
 		if (juego.esFinJuego()) {
 			cronometro.parar();
 			desactivarBotones();
-			
-			ImageIcon icono = new ImageIcon("imagenes\\carita.png");
+
+			ImageIcon icono = new ImageIcon(getClass().getResource("imagenes/carita.png"));
 			botonEmpezar.setIcon(icono);
-			
+
 			mensajeFin("Enhorabuena ha ganado \n ¿Desea jugar otra partida?", "Juego Ganado");
 		}
 
@@ -211,7 +215,7 @@ public class VentanaPrincipal {
 			cronometro.parar();
 			desactivarBotones();
 
-			ImageIcon icono = new ImageIcon("imagenes\\mina.png");
+			ImageIcon icono = new ImageIcon(getClass().getResource("imagenes/mina.png"));
 			botonesJuego[i][j].setText("");
 			botonesJuego[i][j].setIcon(icono);
 
@@ -244,7 +248,8 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método para reiniciar todo el tablero, tanto visualmente como internamente(posición de las minas y numero de minas adjuntas)
+	 * Método para reiniciar todo el tablero, tanto visualmente como
+	 * internamente(posición de las minas y numero de minas adjuntas)
 	 */
 	public void reiniciarPartida() {
 		juego.inicializarPartida();
@@ -266,13 +271,17 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método que muestra el mensaje correspondiente para cada final y reinicia la partida si la opcion selecionada es "YES"
-	 * @param mensaje: El mensaje que muestra el JOptionPane, que sera uno en caso de ganar u otro en caso de perder.
-	 * @param titulo: Titulo de la ventana del JOptionPane que tambien cambia en caso de ganar o de perder.
+	 * Método que muestra el mensaje correspondiente para cada final y reinicia la
+	 * partida si la opcion selecionada es "YES"
+	 * 
+	 * @param mensaje: El mensaje que muestra el JOptionPane, que sera uno en caso
+	 *                 de ganar u otro en caso de perder.
+	 * @param titulo:  Titulo de la ventana del JOptionPane que tambien cambia en
+	 *                 caso de ganar o de perder.
 	 */
 	public void mensajeFin(String mensaje, String titulo) {
 		int opcion = JOptionPane.showConfirmDialog(ventana, mensaje, titulo, JOptionPane.YES_NO_OPTION);
-		if(opcion==JOptionPane.YES_OPTION){
+		if (opcion == JOptionPane.YES_OPTION) {
 			reiniciarPartida();
 		}
 	}
