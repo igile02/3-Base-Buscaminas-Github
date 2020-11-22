@@ -1,7 +1,7 @@
 package buscaminas;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener; 
 
 /**
  * Clase que implementa el listener de los botones del Buscaminas. De alguna
