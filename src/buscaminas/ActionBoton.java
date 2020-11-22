@@ -10,14 +10,20 @@ import java.awt.event.ActionListener;
  * ventana, se puede acceder a la variable de tipo ControlJuego
  * 
  * @author Iván Gil Esteban
- **
+ *
+ * @version 1.0 
+ * @since 1.0 
  */
 public class ActionBoton implements ActionListener {
 
+	//Atributos de la clase
 	private VentanaPrincipal ventana;
 	private int i;
 	private int j;
 
+	/**
+	 * Constructor que recibe un objeto @see VentanaPrincipal y la posicion horizontal y vertical del boton.
+	 */
 	public ActionBoton(VentanaPrincipal ventana, int i, int j) {
 		this.ventana = ventana;
 		this.i = i;
@@ -26,6 +32,9 @@ public class ActionBoton implements ActionListener {
 
 	/**
 	 * Acción que ocurrirá cuando pulsamos uno de los botones.
+	 * Primero comprobamos si la casilla es una mina o no,
+	 * si la casilla no es mina mostramos las minas de alrededor 
+	 * y actualizamos la puntuacion, si es una mina mostramos el fin del juego.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {

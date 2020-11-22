@@ -6,7 +6,9 @@ import java.awt.EventQueue;
  * Clase principal del Buscaminas
  * 
  * @author Iván Gil Esteban
- *
+ * 
+ * @version 1.0 
+ * @since 1.0 
  */
 public class Principal {
 

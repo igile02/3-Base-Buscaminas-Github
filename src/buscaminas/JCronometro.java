@@ -6,6 +6,17 @@ import java.awt.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Clase que extiende de JPanel e implementa Runnable, contiene un JLabel en el que vamos a ir mostrando
+ * el resultado de la operación que va realizando el hilo que creamos para calcular el tiempo que va
+ * transcurriendo desde que damos al boton de empezar, como extiende de JPanel en nuestra clase
+ * @see VentanaPrincipal solo tendremos que añadirlo como si se tratase de un panel.
+ * 
+ * @author Iván Gil Esteban
+ * 
+ * @version 1.0 
+ * @since 1.0 
+ */
 public class JCronometro extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 1L;
@@ -24,7 +35,7 @@ public class JCronometro extends JPanel implements Runnable {
         this.setBackground(Color.CYAN);
         contador = new JLabel("00:00");
         contador.setHorizontalAlignment(JLabel.CENTER);
-        contador.setFont(new Font("Arial", Font.BOLD, 16));
+        contador.setFont(new Font("Arial", Font.BOLD, 14));
         this.add(contador);
     }
 

@@ -7,7 +7,9 @@ package buscaminas;
  * partida
  * 
  * @author Iván Gil Esteban
- *
+ * 
+ * @version 1.0 
+ * @since 1.0 
  */
 public class ControlJuego {
 	private final static int MINA = -1;
@@ -61,8 +63,6 @@ public class ControlJuego {
 				}
 			}
 		}
-
-		depurarTablero();
 	}
 
 	/**

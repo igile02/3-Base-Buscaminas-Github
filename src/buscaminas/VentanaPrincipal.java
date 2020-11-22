@@ -15,20 +15,23 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
- * Ventana principal del Buscaminas
+ * Ventana principal del Buscaminas, en esta clase nos encargamos de todo lo relaccionado con la parte visual
+ * de nuestro juego(mostrar mensajes, actualizar puntuacion, refrescar pantalla, etc), creamos todos 
+ * sus componentes, los inicializamos {@link #inicializar()} {@code ventana.setVisible(true);
+ * 														 		    inicializarComponentes();
+ *																    inicializarListeners();}
+ * y les damos formato, esta clase se encarga también de dar las acciones 
+ * respectivas a cada uno de los botones mediante los listeners.
  * 
  * @author Iván Gil Esteban
  * @see ControlJuego
  * @version 1.0 
  * @since 1.0 
- * {@link #inicializar()}
- * {@code literal}
  */
 public class VentanaPrincipal {
 
 	// La ventana principal, en este caso, guarda todos los componentes:
 	private JFrame ventana;
-	private JPanel panelImagen;
 	private JPanel panelEmpezar;
 	private JPanel panelPuntuacion;
 	private JPanel panelJuego;
@@ -65,8 +68,6 @@ public class VentanaPrincipal {
 
 		// Inicializamos componentes
 		cronometro = new JCronometro();
-		panelImagen = new JPanel(new GridLayout());
-		panelImagen.add(cronometro);
 		panelEmpezar = new JPanel();
 		panelEmpezar.setLayout(new GridLayout(1, 1));
 		panelPuntuacion = new JPanel();
@@ -80,21 +81,21 @@ public class VentanaPrincipal {
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
 
 		// Bordes y colores:
-		panelImagen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		cronometro.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelEmpezar.setBorder(BorderFactory.createTitledBorder("Empezar"));
 		panelPuntuacion.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
 
 		// Colocamos los componentes:
-		// AZUL
+		// Cronometro
 		GridBagConstraints settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 0;
 		settings.weightx = 1;
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
-		ventana.add(panelImagen, settings);
-		// VERDE
+		ventana.add(cronometro, settings);
+		// PanelEmpezar
 		settings = new GridBagConstraints();
 		settings.gridx = 1;
 		settings.gridy = 0;
@@ -102,7 +103,7 @@ public class VentanaPrincipal {
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
 		ventana.add(panelEmpezar, settings);
-		// AMARILLO
+		// PanelPuntuación
 		settings = new GridBagConstraints();
 		settings.gridx = 2;
 		settings.gridy = 0;
@@ -110,7 +111,7 @@ public class VentanaPrincipal {
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
 		ventana.add(panelPuntuacion, settings);
-		// ROJO
+		// PanelJuego
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 1;
@@ -177,10 +178,9 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i, int j) {
 		int num = juego.getMinasAlrededor(i, j);
-		JLabel label = new JLabel();
+		JLabel label = new JLabel(Integer.toString(num));
 		panelesJuego[i][j].removeAll();
 		panelesJuego[i][j].add(label);
-		label.setText(Integer.toString(num));
 		label.setForeground(correspondenciaColores[num]);
 		label.setHorizontalAlignment(JLabel.CENTER);
 		refrescarPantalla();
@@ -192,6 +192,8 @@ public class VentanaPrincipal {
 	 * @param porExplosion : Un booleano que indica si es final del juego porque ha
 	 *                     explotado una mina (true) o bien porque hemos desactivado
 	 *                     todas (false)
+	 * @param i: Posicion vertical del boton que es una mina para colocar el icono de mina.
+	 * @param j: Posicion  del boton que es una mina para colocar el icono de mina.
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el
 	 *       juego.
 	 */
@@ -219,7 +221,7 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método que muestra la puntuación por pantalla.
+	 * Método que actualiza la puntuación de nuestro panel de puntuación
 	 */
 	public void actualizarPuntuacion() {
 		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
@@ -243,7 +245,7 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método para reiniciar todo el tablero y las posiciones de las minas
+	 * Método para reiniciar todo el tablero, tanto visualmente como internamente(posición de las minas y numero de minas adjuntas)
 	 */
 	public void reiniciarPartida() {
 		juego.inicializarPartida();
@@ -254,7 +256,7 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Método para desactivar los botones del tablero.
+	 * Método para desactivar los botones del tablero de juego.
 	 */
 	public void desactivarBotones() {
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -266,8 +268,8 @@ public class VentanaPrincipal {
 
 	/**
 	 * Método que muestra el mensaje correspondiente para cada final y reinicia la partida si la opcion selecionada es "YES"
-	 * @param mensaje
-	 * @param titulo
+	 * @param mensaje: El mensaje que muestra el JOptionPane, que sera uno en caso de ganar u otro en caso de perder.
+	 * @param titulo: Titulo de la ventana del JOptionPane que tambien cambia en caso de ganar o de perder.
 	 */
 	public void mensajeFin(String mensaje, String titulo) {
 		int opcion = JOptionPane.showConfirmDialog(ventana, mensaje, titulo, JOptionPane.YES_NO_OPTION);
